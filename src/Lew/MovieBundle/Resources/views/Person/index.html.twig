@@ -1,0 +1,35 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <hr>
+    {{ form_start(form, {'attr': {'class': 'form-inline text-center'}}) }}
+    {{ form_widget(form.search) }}
+    {{ form_widget(form.submit) }}
+    {{ form_end(form) }}
+    <hr>
+<div class="row">
+    <p>Nombre de personnes <span class="badge">{{ count }}</span></p>
+    {% if persons is defined %}
+        {% for person in persons %}
+            <div class="col-xs-4 col-md-3">
+                <div class="thumbnail" style="max-height: 270px">
+                    <a href="{{ path('lew_person_show', {'id': person.id }) }}">
+                    {% if person.image != null %}
+                        <img src="https://image.tmdb.org/t/p/w150{{ person.image }}" style="min-height: 225px; max-height: 225px">
+                    {% else %}
+                        {% if person.sexe == 1 %}
+                            <img src="{{ asset('bundles/lewmovie/img/no-profile-f.gif') }}" style="min-height: 225px; max-height: 225px">
+                        {% else %}
+                            <img src="{{ asset('bundles/lewmovie/img/no-profile-m.gif') }}" style="min-height: 225px; max-height: 225px">
+                        {% endif %}
+                    {% endif %}
+                    </a>
+                    <div class="caption text-center">
+                        <a href="{{ path('lew_person_show', {'id': person.id }) }}"><b>{{ person.name }}</b></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

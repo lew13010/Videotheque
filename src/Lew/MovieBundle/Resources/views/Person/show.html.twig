@@ -1,0 +1,76 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xs-4">
+            {% if person.image != null %}
+                <img src="https://image.tmdb.org/t/p/w300{{ person.image }}">
+            {% else %}
+                {% if person.sexe == 1 %}
+                    <img src="{{ asset('bundles/lewmovie/img/no-profile-f.gif') }}">
+                {% else %}
+                    <img src="{{ asset('bundles/lewmovie/img/no-profile-m.gif') }}">
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="col-xs-8">
+            <h1>{{ person.name }}</h1>
+            <hr>
+            <p>Métiers : <b>
+                    {% for metier in metiers %}
+                        {{ metier.metier }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </b></p>
+            {% if person.birthDate != null %}
+                <p>Date de Naissance : <b>{{ person.birthDate|date('d/m/Y') }}</b></p>
+            {% endif %}
+            {% if person.deathDate != null %}
+                <p>Date de Décès : <b>{{ person.deathDate|date('d/m/Y') }}</b></p>
+            {% endif %}
+
+            {% if person.birthPlace != null %}
+                <p>Lieu de Naissance : <b>{{ person.birthPlace }}</b></p>
+            {% endif %}
+
+            {% if person.biographie != '' %}
+                <p>Biographie : {{ person.biographie }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <hr>
+    <div>
+        <div>
+            {% for met in metiers %}
+                <h1>{{ met.metier }}</h1>
+                <table class="table table-hover table-responsive table-bordered">
+                    <thead class="bg-success">
+                    <tr>
+                        <th>Année</th>
+                        <th>Titre</th>
+                        {% if met.metier == 'Acteur' %}
+                            <th>Rôle</th>
+                        {% else %}
+                            <th>Métier</th>
+                        {% endif %}
+                        <th>Note</th>
+                    </tr>
+                    </thead>
+                    {% for acteurs in roles[met.metier] %}
+                        <tbody>
+                            <tr>
+                                <td>{{ acteurs.movie.dateSortie|date('Y') }}</td>
+                                <td><b><a href="{{ path('lew_movie_show', {'movie': acteurs.movie.id}) }}">{{ acteurs.movie.title }}</a></b></td>
+                                {% if met.metier == 'Acteur' %}
+                                    <td>{{ acteurs.role }}</td>
+                                {% else %}
+                                    <td>{{ acteurs.metier }}</td>
+                                {% endif %}
+                                <td>{{ acteurs.movie.note }}</td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
