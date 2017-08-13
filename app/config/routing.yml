@@ -1,0 +1,33 @@
+lew_user:
+    resource: "@LewUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+lew_api:
+    resource: "@LewApiBundle/Resources/config/routing.yml"
+    prefix:   /api
+
+lew_movie:
+    resource: "@LewMovieBundle/Resources/config/movie.yml"
+    prefix:   /movie
+
+lew_person:
+    resource: "@LewMovieBundle/Resources/config/person.yml"
+    prefix:   /person
+
+lew_api_update:
+    path:     /update
+    defaults: { _controller: LewApiBundle:Default:update }
+
+register:
+    path: /register
+    defaults: { _controller: LewUserBundle:User:create }
+
+login:
+    path: /login
+    defaults: { _controller: LewUserBundle:User:login }
+
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout
