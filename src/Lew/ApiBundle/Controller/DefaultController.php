@@ -4,6 +4,7 @@ namespace Lew\ApiBundle\Controller;
 
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Lew\ApiBundle\Entity\Casting;
+use Lew\ApiBundle\Entity\Genre;
 use Lew\ApiBundle\Entity\Movie;
 use Lew\ApiBundle\Entity\Person;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -174,7 +175,12 @@ class DefaultController extends Controller
 
     public function testAction()
     {
-        var_dump('test');
-        die;
+        $genre = new Genre();
+        $genre->setId(1);
+        $genre->setName('test');
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($genre);
+        $em->flush();
     }
 }
