@@ -170,19 +170,6 @@ class DefaultController extends Controller
         }else{
             $this->addFlash('danger', 'Echecs de la mise à jour de la base de données');
         }
-        return $this->redirectToRoute('lew_movie_homepage');
-    }
-
-    public function testAction()
-    {
-        $genre = new Genre();
-        $genre->setId(1);
-        $genre->setName('test');
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($genre);
-        $em->flush();
-
         return $this->redirectToRoute('lew_api_homepage');
     }
 }
