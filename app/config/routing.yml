@@ -18,6 +18,10 @@ lew_api_update:
     path:     /update
     defaults: { _controller: LewApiBundle:Default:update }
 
+test_cron:
+    path:     /cron
+    defaults: { _controller: LewApiBundle:Default:test }
+
 register:
     path: /register
     defaults: { _controller: LewUserBundle:User:create }

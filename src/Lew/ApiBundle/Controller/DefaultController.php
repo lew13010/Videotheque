@@ -171,4 +171,10 @@ class DefaultController extends Controller
         }
         return $this->redirectToRoute('lew_movie_homepage');
     }
+
+    public function testAction()
+    {
+        var_dump('test');
+        die;
+    }
 }
