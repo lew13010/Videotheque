@@ -16,6 +16,10 @@
                     {% for genre in film.genres %}
                         <b>{{ genre.name }}{% if not loop.last %}, {% endif %}</b>
                     {% endfor %}</p>
+                <p>Nationalité :
+                    {% for country in film.countries %}
+                        <b>{{ country.name }}{% if not loop.last %}, {% endif %}</b>
+                    {% endfor %}</p>
                 <p>Durée : <b>{{ film.duree }}</b> Minutes</p>
             </div>
             <div class="col-xs-4">
