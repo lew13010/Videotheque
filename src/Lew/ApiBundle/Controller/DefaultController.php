@@ -183,6 +183,6 @@ class DefaultController extends Controller
         $em->persist($genre);
         $em->flush();
 
-        return true;
+        return $this->redirectToRoute('lew_api_homepage');
     }
 }
