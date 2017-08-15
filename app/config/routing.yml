@@ -14,10 +14,6 @@ lew_person:
     resource: "@LewMovieBundle/Resources/config/person.yml"
     prefix:   /person
 
-lew_api_update:
-    path:     /update
-    defaults: { _controller: LewApiBundle:Default:update }
-
 register:
     path: /register
     defaults: { _controller: LewUserBundle:User:create }
