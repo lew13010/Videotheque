@@ -1,0 +1,9 @@
+lew_movie_homepage:
+    path:     /
+    defaults: { _controller: LewMovieBundle:Movie:index }
+
+lew_movie_show:
+    path:     /{movie}
+    defaults: { _controller: LewMovieBundle:Movie:show }
+    requirements:
+        movie:  \d+

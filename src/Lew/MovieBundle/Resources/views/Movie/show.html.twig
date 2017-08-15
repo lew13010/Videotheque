@@ -21,6 +21,12 @@
                         <b>{{ country.name }}{% if not loop.last %}, {% endif %}</b>
                     {% endfor %}</p>
                 <p>Durée : <b>{{ film.duree }}</b> Minutes</p>
+                <p>Réalisateurs :
+                    {% for realisateur in realisateurs %}
+                        <b><a href="{{ path('lew_person_show', {'id': realisateur.id}) }}">{{ realisateur.name }}</a>{% if not loop.last %}, {% endif %}
+                        </b>
+                    {% endfor %}
+                </p>
             </div>
             <div class="col-xs-4">
                 <canvas id="canvas" height="100" width="100" class="pull-right"></canvas>
@@ -28,108 +34,111 @@
         </div>
     </div>
     <hr>
-    <div class="row">
-        <h2>Réalisateurs</h2>
-        {% for realisateur in realisateurs %}
-            <div class="col-xs-4 col-md-3">
-                <div class="thumbnail" style="min-height: 360px; max-height: 360px;">
-                    <a href="{{ path('lew_person_show', {'id': realisateur.id}) }}">
-                        {% if realisateur.image != null %}
-                            <img src="https://image.tmdb.org/t/p/w150{{ realisateur.image }}"
-                                 style="min-height: 250px; max-height: 250px;">
-                        {% else %}
-                            {% if acteur.sexe == 1 %}
-                                <img src="{{ asset('bundles/lewmovie/img/no-profile-f.gif') }}"
-                                     style="min-height: 250px; max-height: 250px;">
-                            {% else %}
-                                <img src="{{ asset('bundles/lewmovie/img/no-profile-m.gif') }}"
-                                     style="min-height: 250px; max-height: 250px;">
-                            {% endif %}
-                        {% endif %}
-                    </a>
-                    <div class="caption">
-                        <h5 style="font-size: 1vw"><a
-                                    href="{{ path('lew_person_show', {'id': realisateur.id}) }}">{{ realisateur.name }}</a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-    <hr>
-    <div class="row">
-        <h2>Acteurs</h2>
-        {% for acteur in acteurs %}
-            {% if loop.index < 13 %}
-                <div class="col-xs-4 col-md-3">
-                    <div class="thumbnail" style="min-height: 360px; max-height: 360px;">
-                        <a href="{{ path('lew_person_show', {'id': acteur.id}) }}">
-                            {% if acteur.image != null %}
-                                <img src="https://image.tmdb.org/t/p/w150{{ acteur.image }}"
-                                     style="min-height: 250px; max-height: 250px;">
-                            {% else %}
-                                {% if acteur.sexe == 1 %}
-                                    <img src="{{ asset('bundles/lewmovie/img/no-profile-f.gif') }}"
-                                         style="min-height: 250px; max-height: 250px;">
-                                {% else %}
-                                    <img src="{{ asset('bundles/lewmovie/img/no-profile-m.gif') }}"
-                                         style="min-height: 250px; max-height: 250px;">
-                                {% endif %}
-                            {% endif %}
-                        </a>
-                        <div class="caption text-center">
-                            <a href="{{ path('lew_person_show', {'id': acteur.id}) }}"><b>{{ acteur.name }}</b></a>
-                            <p><b>Rôle :</b> {{ acteur.role }}</p>
+    <div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#casting" aria-controls="casting" role="tab"
+                                                      data-toggle="tab">Casting <span
+                            class="badge">{{ acteurs|length }}</span></a></li>
+            <li role="presentation"><a href="#staff" aria-controls="staff" role="tab" data-toggle="tab">Equipe Technique
+                    <span class="badge">{{ staffs|length }}</span></a></li>
+            <li role="presentation"><a href="#similar" aria-controls="similar" role="tab" data-toggle="tab">Film
+                    Similaires <span class="badge">{{ similars|length }}</span></a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="casting">
+                <h2>Acteur</h2>
+                {% for acteur in acteurs %}
+                    {% if loop.index < 13 %}
+                        <div class="col-xs-4 col-md-3">
+                            <div class="thumbnail" style="min-height: 360px; max-height: 360px;">
+                                <a href="{{ path('lew_person_show', {'id': acteur.id}) }}">
+                                    {% if acteur.image != null %}
+                                        <img src="https://image.tmdb.org/t/p/w150{{ acteur.image }}"
+                                             style="min-height: 250px; max-height: 250px;">
+                                    {% else %}
+                                        {% if acteur.sexe == 1 %}
+                                            <img src="{{ asset('bundles/lewmovie/img/no-profile-f.gif') }}"
+                                                 style="min-height: 250px; max-height: 250px;">
+                                        {% else %}
+                                            <img src="{{ asset('bundles/lewmovie/img/no-profile-m.gif') }}"
+                                                 style="min-height: 250px; max-height: 250px;">
+                                        {% endif %}
+                                    {% endif %}
+                                </a>
+                                <div class="caption text-center">
+                                    <a href="{{ path('lew_person_show', {'id': acteur.id}) }}"><b>{{ acteur.name }}</b></a>
+                                    <p><b>Rôle :</b> {{ acteur.role }}</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            {% else %}
-                {% if loop.index == 13 %}
-                    <table class="table table-hover table-responsive table-bordered">
+                    {% else %}
+                        {% if loop.index == 13 %}
+                            <table class="table table-hover table-responsive table-bordered">
+                            <thead class="bg-success">
+                            <tr>
+                                <th>Nom</th>
+                                <th>Rôle</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><a href="{{ path('lew_person_show', {'id': acteur.id}) }}">{{ acteur.name }}</a>
+                                </td>
+                                <td>{{ acteur.role }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td><a href="{{ path('lew_person_show', {'id': acteur.id}) }}">{{ acteur.name }}</a>
+                                </td>
+                                <td>{{ acteur.role }}</td>
+                            </tr>
+                        {% endif %}
+                        {% if loop.last %}
+                            </tbody>
+                            </table>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="staff">
+                <h2>Staff</h2>
+                <table class="table table-hover table-responsive table-bordered">
                     <thead class="bg-success">
                     <tr>
-                        <th>Nom</th>
-                        <th>Rôle</th>
+                        <th>Titre</th>
+                        <th>Métier</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td><a href="{{ path('lew_person_show', {'id': acteur.id}) }}">{{ acteur.name }}</a></td>
-                        <td>{{ acteur.role }}</td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td><a href="{{ path('lew_person_show', {'id': acteur.id}) }}">{{ acteur.name }}</a></td>
-                        <td>{{ acteur.role }}</td>
-                    </tr>
-                {% endif %}
-                {% if loop.last %}
-                    </tbody>
-                    </table>
-                {% endif %}
-            {% endif %}
-        {% endfor %}
-    </div>
-    <hr>
-    <div class="row">
-        <h2>Staff</h2>
-        <table class="table table-hover table-responsive table-bordered">
-            <thead class="bg-success">
-            <tr>
-                <th>Titre</th>
-                <th>Métier</th>
-            </tr>
-            </thead>
 
-            <tbody>
-            {% for staff in staffs %}
-                <tr>
-                    <td><a href="{{ path('lew_person_show', {'id': staff.id}) }}">{{ staff.name }}</a></td>
-                    <td>{{ staff.metier }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                    <tbody>
+                    {% for staff in staffs %}
+                        <tr>
+                            <td><a href="{{ path('lew_person_show', {'id': staff.id}) }}">{{ staff.name }}</a></td>
+                            <td>{{ staff.metier }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="similar">
+                <h2>Films similaires</h2>
+                {% for film in similars %}
+                    <div class="col-xs-4 col-md-2">
+                        <div class="thumbnail" style="min-height: 280px">
+                            <a href="{{ path('lew_movie_show', {'movie': film.id }) }}"><img
+                                        src="https://image.tmdb.org/t/p/w150{{ film.image }}"
+                                        style="min-height: 225px;max-height: 225px"></a>
+                            <div class="caption text-center" style="min-height: 30px; max-height: 30px;">
+                                <a href="{{ path('lew_movie_show', {'movie': film.id }) }}"><b>{{ film.title[:25] }}{% if film.title|length > 25 %}…{% endif %}</b></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 {% endblock %}
 
