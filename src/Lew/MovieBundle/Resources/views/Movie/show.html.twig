@@ -2,34 +2,37 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-xs-4">
-            <img src="https://image.tmdb.org/t/p/w300{{ film.image }}">
+        <div class="col-md-4">
+            <img src="https://image.tmdb.org/t/p/w300{{ film.image }}" class="img img-responsive">
         </div>
-        <div class="col-xs-8">
-
-            <h1>{{ film.title }}</h1>
-            <p>{{ film.resume }}</p>
-            <hr>
-            <div class="col-xs-8">
-                <p>Date de Sortie : <b>{{ film.dateSortie|date('d/m/Y') }}</b></p>
-                <p>Genre :
-                    {% for genre in film.genres %}
-                        <b>{{ genre.name }}{% if not loop.last %}, {% endif %}</b>
-                    {% endfor %}</p>
-                <p>Nationalité :
-                    {% for country in film.countries %}
-                        <b>{{ country.name }}{% if not loop.last %}, {% endif %}</b>
-                    {% endfor %}</p>
-                <p>Durée : <b>{{ film.duree }}</b> Minutes</p>
-                <p>Réalisateurs :
-                    {% for realisateur in realisateurs %}
-                        <b><a href="{{ path('lew_person_show', {'id': realisateur.id}) }}">{{ realisateur.name }}</a>{% if not loop.last %}, {% endif %}
-                        </b>
-                    {% endfor %}
-                </p>
+        <div class="col-md-8">
+            <div class="row">
+                <h1>{{ film.title }}</h1>
+                <p>{{ film.resume }}</p>
             </div>
-            <div class="col-xs-4">
-                <canvas id="canvas" height="100" width="100" class="pull-right"></canvas>
+            <hr>
+            <div class="row">
+                <div class="col-xs-8">
+                    <p>Date de Sortie : <b>{{ film.dateSortie|date('d/m/Y') }}</b></p>
+                    <p>Genre :
+                        {% for genre in film.genres %}
+                            <b>{{ genre.name }}{% if not loop.last %}, {% endif %}</b>
+                        {% endfor %}</p>
+                    <p>Nationalité :
+                        {% for country in film.countries %}
+                            <b>{{ country.name }}{% if not loop.last %}, {% endif %}</b>
+                        {% endfor %}</p>
+                    <p>Durée : <b>{{ film.duree }}</b> Minutes</p>
+                    <p>Réalisateurs :
+                        {% for realisateur in realisateurs %}
+                            <b><a href="{{ path('lew_person_show', {'id': realisateur.id}) }}">{{ realisateur.name }}</a>{% if not loop.last %}, {% endif %}
+                            </b>
+                        {% endfor %}
+                    </p>
+                </div>
+                <div class="col-xs-4">
+                    <canvas id="canvas" height="100" width="100" class="pull-right"></canvas>
+                </div>
             </div>
         </div>
     </div>
@@ -52,7 +55,7 @@
                 <h2>Acteur</h2>
                 {% for acteur in acteurs %}
                     {% if loop.index < 13 %}
-                        <div class="col-xs-4 col-md-3">
+                        <div class="col-xs-6 col-md-3">
                             <div class="thumbnail" style="min-height: 360px; max-height: 360px;">
                                 <a href="{{ path('lew_person_show', {'id': acteur.id}) }}">
                                     {% if acteur.image != null %}
@@ -126,7 +129,7 @@
             <div role="tabpanel" class="tab-pane" id="similar">
                 <h2>Films similaires</h2>
                 {% for film in similars %}
-                    <div class="col-xs-4 col-md-2">
+                    <div class="col-xs-6 col-md-2">
                         <div class="thumbnail" style="min-height: 280px">
                             <a href="{{ path('lew_movie_show', {'movie': film.id }) }}"><img
                                         src="https://image.tmdb.org/t/p/w150{{ film.image }}"

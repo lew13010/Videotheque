@@ -11,7 +11,7 @@
     <p>Nombre de personnes <span class="badge">{{ count }}</span></p>
     {% if persons is defined %}
         {% for person in persons %}
-            <div class="col-xs-4 col-md-3">
+            <div class="col-xs-6 col-md-3">
                 <div class="thumbnail" style="max-height: 270px">
                     <a href="{{ path('lew_person_show', {'id': person.id }) }}">
                     {% if person.image != null %}

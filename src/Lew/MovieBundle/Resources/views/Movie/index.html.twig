@@ -13,7 +13,7 @@
         <div class="row">
             <h2>Proposition de film a regarder</h2>
             {% for film in aleatoires %}
-                <div class="col-xs-4 col-md-2">
+                <div class="col-xs-6 col-md-2">
                     <div class="thumbnail" style="min-height: 280px">
                         <a href="{{ path('lew_movie_show', {'movie': film.id }) }}"><img
                                     src="https://image.tmdb.org/t/p/w150{{ film.image }}"
@@ -31,7 +31,7 @@
         <h2>Liste des films</h2>
         <p>Nombre de film <span class="badge">{{ count }}</span></p>
         {% for film in films %}
-            <div class="col-xs-4 col-md-2">
+            <div class="col-xs-6 col-md-2">
                 <div class="thumbnail" style="min-height: 280px">
                     <a href="{{ path('lew_movie_show', {'movie': film.id }) }}"><img
                                 src="https://image.tmdb.org/t/p/w150{{ film.image }}"
