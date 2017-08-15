@@ -51,7 +51,7 @@
 
         <!-- Tab panes -->
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="casting">
+            <div role="tabpanel" class="tab-pane fade in active" id="casting">
                 <h2>Acteur</h2>
                 {% for acteur in acteurs %}
                     {% if loop.index < 13 %}
@@ -106,7 +106,7 @@
                     {% endif %}
                 {% endfor %}
             </div>
-            <div role="tabpanel" class="tab-pane" id="staff">
+            <div role="tabpanel" class="tab-pane fade" id="staff">
                 <h2>Staff</h2>
                 <table class="table table-hover table-responsive table-bordered">
                     <thead class="bg-success">
@@ -126,7 +126,7 @@
                     </tbody>
                 </table>
             </div>
-            <div role="tabpanel" class="tab-pane" id="similar">
+            <div role="tabpanel" class="tab-pane fade" id="similar">
                 <h2>Films similaires</h2>
                 {% for film in similars %}
                     <div class="col-xs-6 col-md-2">
