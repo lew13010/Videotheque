@@ -22,7 +22,7 @@
                     {% endfor %}
                 </b></p>
             {% if person.birthDate != null %}
-                <p>Date de Naissance : <b>{{ person.birthDate|date('d/m/Y') }}</b></p>
+                <p>Date de Naissance : <b>{{ person.birthDate|date('d/m/Y') }}</b> - <b>{{ person.age }}</b> ans</p>
             {% endif %}
             {% if person.deathDate != null %}
                 <p>Date de Décès : <b>{{ person.deathDate|date('d/m/Y') }}</b></p>
