@@ -162,14 +162,4 @@ class DefaultController extends Controller
         $this->getDoctrine()->resetManager();
         return true;
     }
-
-    public function updateAction()
-    {
-        if($this->get('lew_api.service.api_request')->getUpdateMovie()){
-            $this->addFlash('success', 'Base de données mise à jour');
-        }else{
-            $this->addFlash('danger', 'Echecs de la mise à jour de la base de données');
-        }
-        return $this->redirectToRoute('lew_api_homepage');
-    }
 }

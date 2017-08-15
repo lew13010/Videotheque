@@ -68,7 +68,7 @@ class ApiRequest
         return json_decode(file_get_contents($url));
     }
 
-    public function getUpdateMovie()
+    public function getUpdatePerson()
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $yesterday = new \DateTime('yesterday');
@@ -91,6 +91,11 @@ class ApiRequest
                         if ($personChange->key == 'birthday'){
                             if ($personChange->items[0]->action == 'updated' || $personChange->items[0]->action == 'added' && isset($personChange->items[0]->value)){
                                 $person->setBirthDate($personChange->items[0]->value);
+                            }
+                            if (isset($personChange->items[1]) && isset($personChange->items[1]->value)){
+                                if ($personChange->items[1]->action == 'updated' || $personChange->items[1]->action == 'added'){
+                                    $person->setBirthDate($personChange->items[1]->value);
+                                }
                             }
                         }
                         if ($personChange->key == 'deathday'){
