@@ -89,33 +89,58 @@ class ApiRequest
                     $personChanges = json_decode(file_get_contents($urlPersonChange));
                     foreach ($personChanges->changes as $personChange) {
                         if ($personChange->key == 'birthday'){
-                            if ($personChange->items[0]->action == 'updated' || $personChange->items[0]->action == 'added' && isset($personChange->items[0]->value)){
-                                $person->setBirthDate($personChange->items[0]->value);
-                            }
-                            if (isset($personChange->items[1]) && isset($personChange->items[1]->value)){
+                            if (isset($personChange->items[0]) && isset($personChange->items[0]->value)){
+                                if ($personChange->items[0]->action == 'updated' || $personChange->items[0]->action == 'added'){
+                                    $person->setBirthDate($personChange->items[0]->value);
+                                }
+                            }elseif (isset($personChange->items[1]) && isset($personChange->items[1]->value)){
                                 if ($personChange->items[1]->action == 'updated' || $personChange->items[1]->action == 'added'){
                                     $person->setBirthDate($personChange->items[1]->value);
                                 }
                             }
                         }
                         if ($personChange->key == 'deathday'){
-                            if ($personChange->items[0]->action == 'updated' || $personChange->items[0]->action == 'added' && isset($personChange->items[0]->value)){
-                                $person->setDeathDate($personChange->items[0]->value);
+                            if (isset($personChange->items[0]) && isset($personChange->items[0]->value)){
+                                if ($personChange->items[0]->action == 'updated' || $personChange->items[0]->action == 'added'){
+                                    $person->setDeathDate($personChange->items[0]->value);
+                                }
+                            }elseif (isset($personChange->items[1]) && isset($personChange->items[1]->value)){
+                                if ($personChange->items[1]->action == 'updated' || $personChange->items[1]->action == 'added'){
+                                    $person->setDeathDate($personChange->items[1]->value);
+                                }
                             }
                         }
                         if ($personChange->key == 'gender'){
-                            if ($personChange->items[0]->action == 'updated' || $personChange->items[0]->action == 'added' && isset($personChange->items[0]->value)){
-                                $person->setSexe($personChange->items[0]->value);
+                            if (isset($personChange->items[0]) && isset($personChange->items[0]->value)){
+                                if ($personChange->items[0]->action == 'updated' || $personChange->items[0]->action == 'added'){
+                                    $person->setSexe($personChange->items[0]->value);
+                                }
+                            }elseif (isset($personChange->items[1]) && isset($personChange->items[1]->value)){
+                                if ($personChange->items[1]->action == 'updated' || $personChange->items[1]->action == 'added'){
+                                    $person->setSexe($personChange->items[1]->value);
+                                }
                             }
                         }
                         if ($personChange->key == 'biography' && $personChange->items[0]->iso_639_1 == 'fr'){
-                            if ($personChange->items[0]->action == 'updated' || $personChange->items[0]->action == 'added' && isset($personChange->items[0]->value)){
-                                $person->setBiographie($personChange->items[0]->value);
+                            if (isset($personChange->items[0]) && isset($personChange->items[0]->value)){
+                                if ($personChange->items[0]->action == 'updated' || $personChange->items[0]->action == 'added'){
+                                    $person->setBiographie($personChange->items[0]->value);
+                                }
+                            }elseif (isset($personChange->items[1]) && isset($personChange->items[1]->value)){
+                                if ($personChange->items[1]->action == 'updated' || $personChange->items[1]->action == 'added'){
+                                    $person->setBiographie($personChange->items[1]->value);
+                                }
                             }
                         }
                         if ($personChange->key == 'place_of_birth'){
-                            if ($personChange->items[0]->action == 'updated' || $personChange->items[0]->action == 'added' && isset($personChange->items[0]->value)){
-                                $person->setBirthPlace($personChange->items[0]->value);
+                            if (isset($personChange->items[0]) && isset($personChange->items[0]->value)){
+                                if ($personChange->items[0]->action == 'updated' || $personChange->items[0]->action == 'added'){
+                                    $person->setBirthPlace($personChange->items[0]->value);
+                                }
+                            }elseif (isset($personChange->items[1]) && isset($personChange->items[1]->value)){
+                                if ($personChange->items[1]->action == 'updated' || $personChange->items[1]->action == 'added'){
+                                    $person->setBirthPlace($personChange->items[1]->value);
+                                }
                             }
                         }
                     }
