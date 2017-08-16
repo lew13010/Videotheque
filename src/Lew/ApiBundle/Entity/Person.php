@@ -310,6 +310,10 @@ class Person
 
     public function getAge()
     {
-        return $this->getBirthDate()->diff(new \DateTime())->format('%Y');
+        if ($this->getDeathDate() != null){
+            return $this->getDeathDate()->diff($this->getBirthDate())->format('%Y');
+        }else{
+            return $this->getBirthDate()->diff(new \DateTime())->format('%Y');
+        }
     }
 }
