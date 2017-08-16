@@ -134,4 +134,30 @@ class MovieRepository extends \Doctrine\ORM\EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function getRecentlyMovies()
+    {
+        $date = new \DateTime();
+        $week = date_sub($date, date_interval_create_from_date_string('7 days'));
+
+        $qb = $this->createQueryBuilder('m');
+        $qb
+            ->select('m')
+            ->where('m.dateAjout > :week')
+            ->setParameter(':week', $week)
+            ->orderBy('m.dateAjout', 'desc')
+        ;
+        return $qb->getQuery()->getResult();
+    }
+
+    public function tops()
+    {
+        $qb = $this->createQueryBuilder('m');
+        $qb
+            ->select('m')
+            ->orderBy('m.note', 'desc')
+            ->setMaxResults(12)
+        ;
+        return $qb->getQuery()->getResult();
+    }
 }
