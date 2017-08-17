@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <h2>Films ajoutés récemment <span class="badge">{{ recently|length }}</span></h2>
+        {% for film in recently %}
+            <div class="col-xs-6 col-md-2">
+                <div class="thumbnail">
+                    <a href="{{ path('lew_movie_show', {'movie': film.id }) }}"><img
+                                src="https://image.tmdb.org/t/p/w150{{ film.image }}"></a>
+                    <div class="caption text-center">
+                        <a href="{{ path('lew_movie_show', {'movie': film.id }) }}"><b>{{ film.title[:25] }}{% if film.title|length > 25 %}…{% endif %}</b></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <h2>Top 12 Movies</h2>
+        {% for film in tops %}
+            <div class="col-xs-6 col-md-2">
+                <div class="thumbnail">
+                    <a href="{{ path('lew_movie_show', {'movie': film.id }) }}"><img
+                                src="https://image.tmdb.org/t/p/w150{{ film.image }}"></a>
+                    <div class="caption text-center">
+                        <a href="{{ path('lew_movie_show', {'movie': film.id }) }}"><b>{{ film.title[:25] }}{% if film.title|length > 25 %}…{% endif %}</b></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <h2>Top 12 Acteurs</h2>
+        {% for person in topsActeur %}
+            <div class="col-xs-6 col-md-2">
+                <div class="thumbnail">
+                    <a href="{{ path('lew_person_show', {'id': person.id }) }}">
+                        {% if person.image != null %}
+                            <img src="https://image.tmdb.org/t/p/w150{{ person.image }}">
+                        {% else %}
+                            {% if person.sexe == 1 %}
+                                <img src="{{ asset('bundles/lewmovie/img/no-profile-f.gif') }}">
+                            {% else %}
+                                <img src="{{ asset('bundles/lewmovie/img/no-profile-m.gif') }}">
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                    <div class="caption text-center">
+                        <a href="{{ path('lew_person_show', {'id': person.id }) }}"><b>{{ person.name }}</b></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <h2>Top 12 Actrices</h2>
+        {% for person in topsActrices %}
+            <div class="col-xs-6 col-md-2">
+                <div class="thumbnail">
+                    <a href="{{ path('lew_person_show', {'id': person.id }) }}">
+                        {% if person.image != null %}
+                            <img src="https://image.tmdb.org/t/p/w150{{ person.image }}">
+                        {% else %}
+                            {% if person.sexe == 1 %}
+                                <img src="{{ asset('bundles/lewmovie/img/no-profile-f.gif') }}">
+                            {% else %}
+                                <img src="{{ asset('bundles/lewmovie/img/no-profile-m.gif') }}">
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                    <div class="caption text-center">
+                        <a href="{{ path('lew_person_show', {'id': person.id }) }}"><b>{{ person.name }}</b></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <h2>Top 12 Réalisateurs</h2>
+        {% for person in topsReal %}
+            <div class="col-xs-6 col-md-2">
+                <div class="thumbnail">
+                    <a href="{{ path('lew_person_show', {'id': person.id }) }}">
+                        {% if person.image != null %}
+                            <img src="https://image.tmdb.org/t/p/w150{{ person.image }}">
+                        {% else %}
+                            {% if person.sexe == 1 %}
+                                <img src="{{ asset('bundles/lewmovie/img/no-profile-f.gif') }}">
+                            {% else %}
+                                <img src="{{ asset('bundles/lewmovie/img/no-profile-m.gif') }}">
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                    <div class="caption text-center">
+                        <a href="{{ path('lew_person_show', {'id': person.id }) }}"><b>{{ person.name }}</b></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <h2>Top 12 Producteurs</h2>
+        {% for person in topsProd %}
+            <div class="col-xs-4 col-md-2">
+                <div class="thumbnail">
+                    <a href="{{ path('lew_person_show', {'id': person.id }) }}">
+                        {% if person.image != null %}
+                            <img src="https://image.tmdb.org/t/p/w150{{ person.image }}">
+                        {% else %}
+                            {% if person.sexe == 1 %}
+                                <img src="{{ asset('bundles/lewmovie/img/no-profile-f.gif') }}">
+                            {% else %}
+                                <img src="{{ asset('bundles/lewmovie/img/no-profile-m.gif') }}">
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                    <div class="caption text-center">
+                        <a href="{{ path('lew_person_show', {'id': person.id }) }}"><b>{{ person.name }}</b></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
