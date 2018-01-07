@@ -7,3 +7,8 @@ lew_movie_show:
     defaults: { _controller: LewMovieBundle:Movie:show }
     requirements:
         movie:  \d+
+
+lew_movie_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LewMovieBundle:Movie:delete" }
+    methods:  DELETE

@@ -2,6 +2,7 @@
 
 namespace Lew\MovieBundle\Controller;
 
+use Lew\ApiBundle\Entity\Movie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -51,8 +52,10 @@ class MovieController extends Controller
         ));
     }
 
-    public function showAction(Request $request, $movie)
+    public function showAction(Request $request, Movie $movie)
     {
+        $deleteForm = $this->createDeleteForm($movie);
+
         $similars = $this->getDoctrine()->getRepository('LewApiBundle:Movie')->getSimilarMovie($movie);
 
         $film = $this->getDoctrine()->getRepository('LewApiBundle:Movie')->find($movie);
@@ -67,6 +70,41 @@ class MovieController extends Controller
             'acteurs' => $acteurs,
             'staffs' => $staffs,
             'similars' => $similars,
+            'delete_form' => $deleteForm->createView(),
         ));
+    }
+
+    /**
+     * Deletes a movie entity.
+     *
+     */
+    public function deleteAction(Request $request, Movie $movie)
+    {
+        $form = $this->createDeleteForm($movie);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($movie);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('lew_movie_homepage');
+    }
+
+    /**
+     * Creates a form to delete a lineUp entity.
+     *
+     * @param Movie $movie The Movie entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(Movie $movie)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('lew_movie_delete', array('id' => $movie->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+            ;
     }
 }

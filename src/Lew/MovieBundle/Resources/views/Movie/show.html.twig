@@ -8,6 +8,34 @@
         <div class="col-md-8">
             <div class="row">
                 <h1>{{ film.title }}</h1>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal">
+                        Supprimer
+                    </button>
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Suppression</h4>
+                                </div>
+                                <div class="modal-body">
+                                    Etes-vous sur de vouloir supprimer le film : <b>{{ film.title }}</b>
+                                </div>
+                                <div class="modal-footer">
+                                    {{ form_start(delete_form) }}
+                                    <div class="justify-content-end">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                        </button>
+                                        <input type="submit" value="Supprimer" class="btn btn-danger">
+                                    </div>
+                                    {{ form_end(delete_form) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
                 <p>{{ film.resume }}</p>
             </div>
             <hr>
@@ -31,7 +59,7 @@
                     </p>
                 </div>
                 <div class="col-xs-4">
-                    <canvas id="canvas" height="100" width="100" class="pull-right"></canvas>
+                    <canvas id="canvas" height="150" width="150" class="pull-right"></canvas>
                 </div>
             </div>
         </div>
@@ -55,25 +83,27 @@
                 <h2>Acteur</h2>
                 {% for acteur in acteurs %}
                     {% if loop.index < 13 %}
-                        <div class="col-xs-6 col-md-3">
-                            <div class="thumbnail" style="min-height: 360px; max-height: 360px;">
+                        <div class="col-xs-4 col-md-2">
+                            <div class="thumbnail">
                                 <a href="{{ path('lew_person_show', {'id': acteur.id}) }}">
                                     {% if acteur.image != null %}
                                         <img src="https://image.tmdb.org/t/p/w150{{ acteur.image }}"
-                                             style="min-height: 250px; max-height: 250px;">
+                                             class="img img-responsive">
                                     {% else %}
                                         {% if acteur.sexe == 1 %}
                                             <img src="{{ asset('bundles/lewmovie/img/no-profile-f.gif') }}"
-                                                 style="min-height: 250px; max-height: 250px;">
+                                                 class="img img-responsive">
                                         {% else %}
                                             <img src="{{ asset('bundles/lewmovie/img/no-profile-m.gif') }}"
-                                                 style="min-height: 250px; max-height: 250px;">
+                                                 class="img img-responsive">
                                         {% endif %}
                                     {% endif %}
                                 </a>
                                 <div class="caption text-center">
-                                    <a href="{{ path('lew_person_show', {'id': acteur.id}) }}"><b>{{ acteur.name }}</b></a>
-                                    <p><b>Rôle :</b> {{ acteur.role }}</p>
+                                    <p>
+                                        <a href="{{ path('lew_person_show', {'id': acteur.id}) }}"><b>{{ acteur.name }}</b></a><br>
+                                        {{ acteur.role }}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -130,11 +160,10 @@
                 <h2>Films similaires</h2>
                 {% for film in similars %}
                     <div class="col-xs-6 col-md-2">
-                        <div class="thumbnail" style="min-height: 280px">
-                            <a href="{{ path('lew_movie_show', {'movie': film.id }) }}"><img
-                                        src="https://image.tmdb.org/t/p/w150{{ film.image }}"
-                                        style="min-height: 225px;max-height: 225px"></a>
-                            <div class="caption text-center" style="min-height: 30px; max-height: 30px;">
+                        <div class="thumbnail">
+                            <a href="{{ path('lew_movie_show', {'movie': film.id }) }}">
+                                <img src="https://image.tmdb.org/t/p/w150{{ film.image }}"></a>
+                            <div class="caption text-center">
                                 <a href="{{ path('lew_movie_show', {'movie': film.id }) }}"><b>{{ film.title[:25] }}{% if film.title|length > 25 %}…{% endif %}</b></a>
                             </div>
                         </div>
