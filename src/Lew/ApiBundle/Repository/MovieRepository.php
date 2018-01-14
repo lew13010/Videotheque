@@ -39,7 +39,7 @@ class MovieRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('title', '%' . $title . '%')
             ->orderBy('m.' . $ordre, $tri);
 
-        if ($vu != null){
+        if ($vu !== null){
             $qb
                 ->andWhere('m.vu = :vu')
                 ->setParameter('vu', $vu);
