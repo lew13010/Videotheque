@@ -4,6 +4,11 @@ namespace Lew\MovieBundle\Controller;
 
 use Lew\ApiBundle\Entity\Movie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 
 class MovieController extends Controller
@@ -29,7 +34,7 @@ class MovieController extends Controller
                 $genre = $form->getData()['genre']->getId();
                 $films = $repo->searchMoviesByGenre($title, $genre, $ordre, $tri);
                 $aleatoires = $repo->aleatoires(6, $genre);
-            }else{
+            } else {
                 $aleatoires = $repo->aleatoires(6);
                 $films = $repo->searchMovies($title, $ordre, $tri);
             }
@@ -54,6 +59,26 @@ class MovieController extends Controller
 
     public function showAction(Request $request, Movie $movie)
     {
+        $form = $this->get('form.factory')->createBuilder(FormType::class, $movie)
+            ->add('vu', ChoiceType::class, array(
+                'choices' => array(
+                    'Déjà vu' => true,
+                    'Pas Vu' => false,
+                ),
+                'mapped' => true,
+                'multiple' => false,
+                'expanded' => true,
+            ))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($movie);
+            $em->flush();
+        }
+
         $deleteForm = $this->createDeleteForm($movie);
 
         $similars = $this->getDoctrine()->getRepository('LewApiBundle:Movie')->getSimilarMovie($movie);
@@ -71,6 +96,7 @@ class MovieController extends Controller
             'staffs' => $staffs,
             'similars' => $similars,
             'delete_form' => $deleteForm->createView(),
+            'vu_form' => $form->createView(),
         ));
     }
 
@@ -104,7 +130,6 @@ class MovieController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('lew_movie_delete', array('id' => $movie->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-            ;
+            ->getForm();
     }
 }

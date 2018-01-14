@@ -9,8 +9,8 @@
             <div class="row">
                 <h1>{{ film.title }}</h1>
                 {% if is_granted('ROLE_ADMIN') %}
-                    <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal">
-                        Supprimer
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+                        Editer
                     </button>
                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
@@ -18,19 +18,31 @@
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                                 aria-hidden="true">&times;</span></button>
+                                    <h3 class="modal-title" id="myModalLabel">Edition</h3>
+                                </div>
+                                <div class="modal-header">
                                     <h4 class="modal-title" id="myModalLabel">Suppression</h4>
                                 </div>
                                 <div class="modal-body">
                                     Etes-vous sur de vouloir supprimer le film : <b>{{ film.title }}</b>
-                                </div>
-                                <div class="modal-footer">
                                     {{ form_start(delete_form) }}
                                     <div class="justify-content-end">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
-                                        </button>
                                         <input type="submit" value="Supprimer" class="btn btn-danger">
                                     </div>
                                     {{ form_end(delete_form) }}
+                                </div>
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel">Déjà Vu</h4>
+                                </div>
+                                <div class="modal-body">
+                                    {{ form_start(vu_form) }}
+                                    {{ form_widget(vu_form) }}
+                                    <input type="submit" value="Modifier" class="btn btn-success"/>
+                                    {{ form_end(vu_form) }}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -56,6 +68,15 @@
                             <b><a href="{{ path('lew_person_show', {'id': realisateur.id}) }}">{{ realisateur.name }}</a>{% if not loop.last %}, {% endif %}
                             </b>
                         {% endfor %}
+                    </p>
+                    <p>Déjà vu :
+                        <b>
+                            {% if film.vu %}
+                                Oui
+                            {% else %}
+                                Non
+                            {% endif %}
+                        </b>
                     </p>
                 </div>
                 <div class="col-xs-4">

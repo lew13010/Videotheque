@@ -83,6 +83,14 @@ class Movie
     private $dateAjout;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="vu", type="boolean")
+     */
+    private $vu;
+
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -382,5 +390,19 @@ class Movie
         $this->dateAjout = new \DateTime();
     }
 
+    /**
+     * @return bool
+     */
+    public function isVu()
+    {
+        return $this->vu;
+    }
 
+    /**
+     * @param bool $vu
+     */
+    public function setVu($vu)
+    {
+        $this->vu = $vu;
+    }
 }
