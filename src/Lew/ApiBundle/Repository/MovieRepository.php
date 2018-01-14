@@ -138,7 +138,7 @@ class MovieRepository extends \Doctrine\ORM\EntityRepository
     public function getRecentlyMovies()
     {
         $date = new \DateTime();
-        $week = date_sub($date, date_interval_create_from_date_string('7 days'));
+        $week = date_sub($date, date_interval_create_from_date_string('1 month'));
 
         $qb = $this->createQueryBuilder('m');
         $qb
