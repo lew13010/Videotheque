@@ -30,13 +30,16 @@ class MovieController extends Controller
                 $title = null;
             }
 
+            $vu = $form->getData()['vu'];
+
+
             if ($form->getData()['genre'] != null) {
                 $genre = $form->getData()['genre']->getId();
-                $films = $repo->searchMoviesByGenre($title, $genre, $ordre, $tri);
+                $films = $repo->searchMoviesByGenre($title, $genre, $ordre, $tri, $vu);
                 $aleatoires = $repo->aleatoires(6, $genre);
             } else {
                 $aleatoires = $repo->aleatoires(6);
-                $films = $repo->searchMovies($title, $ordre, $tri);
+                $films = $repo->searchMovies($title, $ordre, $tri, $vu);
             }
 
             if (empty($films)) {

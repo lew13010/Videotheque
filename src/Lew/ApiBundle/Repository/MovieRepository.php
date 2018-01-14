@@ -10,7 +10,7 @@ namespace Lew\ApiBundle\Repository;
  */
 class MovieRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function searchMoviesByGenre($title, $genre, $ordre, $tri)
+    public function searchMoviesByGenre($title, $genre, $ordre, $tri, $vu)
     {
         $qb = $this->createQueryBuilder('m');
 
@@ -21,10 +21,16 @@ class MovieRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('genre', $genre)
             ->orderBy('m.' . $ordre, $tri);
 
+        if ($vu != null){
+            $qb
+                ->andWhere('m.vu = :vu')
+                ->setParameter('vu', $vu);
+        }
+
         return $qb->getQuery()->getResult();
     }
 
-    public function searchMovies($title, $ordre, $tri)
+    public function searchMovies($title, $ordre, $tri, $vu)
     {
         $qb = $this->createQueryBuilder('m');
 
@@ -32,6 +38,12 @@ class MovieRepository extends \Doctrine\ORM\EntityRepository
             ->where('m.title LIKE :title')
             ->setParameter('title', '%' . $title . '%')
             ->orderBy('m.' . $ordre, $tri);
+
+        if ($vu != null){
+            $qb
+                ->andWhere('m.vu = :vu')
+                ->setParameter('vu', $vu);
+        }
 
         return $qb->getQuery()->getResult();
     }

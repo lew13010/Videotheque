@@ -28,6 +28,14 @@ class TriType extends AbstractType
                 ),
                 'required' => false,
             ))
+            ->add('vu', ChoiceType::class, array(
+                'placeholder' => '-- Tous --',
+                'choices' => array(
+                    'Pas Vu' => false,
+                    'Déjà Vu' => true,
+                ),
+                'required' => false,
+            ))
             ->add('genre', EntityType::class, array(
                 'class' => 'Lew\ApiBundle\Entity\Genre',
                 'choice_label' => 'name',
