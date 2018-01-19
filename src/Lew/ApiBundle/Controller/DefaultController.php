@@ -73,6 +73,8 @@ class DefaultController extends Controller
             $film->setNote($movie->vote_average);
             $film->setImage($movie->poster_path);
             $film->setResume($movie->overview);
+            $film->setDateAjout();
+            $film->setVu(false);
             foreach ($movie->production_countries as $country) {
                 $pays = $repoPays->findOneBy(array('alphaCode' => $country->iso_3166_1));
                 $film->addCountry($pays);
