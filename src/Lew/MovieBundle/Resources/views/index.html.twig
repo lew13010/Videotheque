@@ -8,7 +8,7 @@
             <div class="col-xs-6 col-md-2">
                 <div class="thumbnail">
                     <a href="{{ path('lew_movie_show', {'movie': film.id }) }}"><img
-                                src="https://image.tmdb.org/t/p/w150{{ film.image }}"></a>
+                                src="https://image.tmdb.org/t/p/w300_and_h450_bestv2{{ film.image }}"></a>
                     <div class="caption text-center">
                         <a href="{{ path('lew_movie_show', {'movie': film.id }) }}"><b>{{ film.title[:25] }}{% if film.title|length > 25 %}…{% endif %}</b></a>
                     </div>
@@ -25,7 +25,7 @@
             <div class="col-xs-6 col-md-2">
                 <div class="thumbnail">
                     <a href="{{ path('lew_movie_show', {'movie': film.id }) }}"><img
-                                src="https://image.tmdb.org/t/p/w150{{ film.image }}"></a>
+                                src="https://image.tmdb.org/t/p/w300_and_h450_bestv2{{ film.image }}"></a>
                     <div class="caption text-center">
                         <a href="{{ path('lew_movie_show', {'movie': film.id }) }}"><b>{{ film.title[:25] }}{% if film.title|length > 25 %}…{% endif %}</b></a>
                     </div>
@@ -43,7 +43,7 @@
                 <div class="thumbnail">
                     <a href="{{ path('lew_person_show', {'id': person.id }) }}">
                         {% if person.image != null %}
-                            <img src="https://image.tmdb.org/t/p/w150{{ person.image }}">
+                            <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2{{ person.image }}">
                         {% else %}
                             {% if person.sexe == 1 %}
                                 <img src="{{ asset('bundles/lewmovie/img/no-profile-f.gif') }}">
@@ -69,7 +69,7 @@
                 <div class="thumbnail">
                     <a href="{{ path('lew_person_show', {'id': person.id }) }}">
                         {% if person.image != null %}
-                            <img src="https://image.tmdb.org/t/p/w150{{ person.image }}">
+                            <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2{{ person.image }}">
                         {% else %}
                             {% if person.sexe == 1 %}
                                 <img src="{{ asset('bundles/lewmovie/img/no-profile-f.gif') }}">
@@ -95,7 +95,7 @@
                 <div class="thumbnail">
                     <a href="{{ path('lew_person_show', {'id': person.id }) }}">
                         {% if person.image != null %}
-                            <img src="https://image.tmdb.org/t/p/w150{{ person.image }}">
+                            <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2{{ person.image }}">
                         {% else %}
                             {% if person.sexe == 1 %}
                                 <img src="{{ asset('bundles/lewmovie/img/no-profile-f.gif') }}">
@@ -121,7 +121,7 @@
                 <div class="thumbnail">
                     <a href="{{ path('lew_person_show', {'id': person.id }) }}">
                         {% if person.image != null %}
-                            <img src="https://image.tmdb.org/t/p/w150{{ person.image }}">
+                            <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2{{ person.image }}">
                         {% else %}
                             {% if person.sexe == 1 %}
                                 <img src="{{ asset('bundles/lewmovie/img/no-profile-f.gif') }}">
