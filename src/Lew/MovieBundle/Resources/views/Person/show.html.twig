@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-xs-4">
             {% if person.image != null %}
-                <img src="https://image.tmdb.org/t/p/w300{{ person.image }}" class="img img-responsive">
+                <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2{{ person.image }}" class="img img-responsive">
             {% else %}
                 {% if person.sexe == 1 %}
                     <img src="{{ asset('bundles/lewmovie/img/no-profile-f.gif') }}" class="img img-responsive">

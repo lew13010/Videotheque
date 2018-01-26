@@ -108,7 +108,7 @@
                             <div class="thumbnail">
                                 <a href="{{ path('lew_person_show', {'id': acteur.id}) }}">
                                     {% if acteur.image != null %}
-                                        <img src="https://image.tmdb.org/t/p/w150{{ acteur.image }}"
+                                        <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2{{ acteur.image }}"
                                              class="img img-responsive">
                                     {% else %}
                                         {% if acteur.sexe == 1 %}
@@ -183,7 +183,7 @@
                     <div class="col-xs-6 col-md-2">
                         <div class="thumbnail">
                             <a href="{{ path('lew_movie_show', {'movie': film.id }) }}">
-                                <img src="https://image.tmdb.org/t/p/w150{{ film.image }}"></a>
+                                <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2{{ film.image }}"></a>
                             <div class="caption text-center">
                                 <a href="{{ path('lew_movie_show', {'movie': film.id }) }}"><b>{{ film.title[:25] }}{% if film.title|length > 25 %}…{% endif %}</b></a>
                             </div>

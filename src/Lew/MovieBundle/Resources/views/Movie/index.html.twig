@@ -10,34 +10,16 @@
     {{ form_widget(form.submit) }}
     {{ form_end(form) }}
     <hr>
-    {% if count > 30 %}
-        <div class="row">
-            <h2>Proposition de film a regarder</h2>
-            {% for film in aleatoires %}
-                <div class="col-xs-6 col-md-2">
-                    <div class="thumbnail" style="min-height: 280px">
-                        <a href="{{ path('lew_movie_show', {'movie': film.id }) }}"><img
-                                    src="https://image.tmdb.org/t/p/w150{{ film.image }}"
-                                    style="min-height: 225px;max-height: 225px"></a>
-                        <div class="caption text-center" style="min-height: 30px; max-height: 30px;">
-                            <a href="{{ path('lew_movie_show', {'movie': film.id }) }}"><b>{{ film.title[:25] }}{% if film.title|length > 25 %}…{% endif %}</b></a>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-        <hr>
-    {% endif %}
+
     <div class="row">
         <h2>Liste des films</h2>
         <p>Nombre de film <span class="badge">{{ count }}</span></p>
         {% for film in films %}
-            <div class="col-xs-6 col-md-2">
-                <div class="thumbnail" style="min-height: 280px">
-                    <a href="{{ path('lew_movie_show', {'movie': film.id }) }}"><img
-                                src="https://image.tmdb.org/t/p/w150{{ film.image }}"
-                                style="min-height: 225px;max-height: 225px"></a>
-                    <div class="caption text-center" style="min-height: 30px; max-height: 30px;">
+            <div class="col-xs-4 col-md-2">
+                <div class="thumbnail">
+                    <a href="{{ path('lew_movie_show', {'movie': film.id }) }}">
+                        <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2{{ film.image }}"></a>
+                    <div class="caption text-center">
                         <a href="{{ path('lew_movie_show', {'movie': film.id }) }}"><b>{{ film.title[:25] }}{% if film.title|length > 25 %}…{% endif %}</b></a>
                     </div>
                 </div>

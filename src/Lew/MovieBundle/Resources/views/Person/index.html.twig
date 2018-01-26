@@ -11,16 +11,16 @@
     <p>Nombre de personnes <span class="badge">{{ count }}</span></p>
     {% if persons is defined %}
         {% for person in persons %}
-            <div class="col-xs-6 col-md-3">
-                <div class="thumbnail" style="max-height: 270px">
+            <div class="col-xs-4 col-md-3">
+                <div class="thumbnail">
                     <a href="{{ path('lew_person_show', {'id': person.id }) }}">
                     {% if person.image != null %}
-                        <img src="https://image.tmdb.org/t/p/w150{{ person.image }}" style="min-height: 225px; max-height: 225px">
+                        <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2{{ person.image }}">
                     {% else %}
                         {% if person.sexe == 1 %}
-                            <img src="{{ asset('bundles/lewmovie/img/no-profile-f.gif') }}" style="min-height: 225px; max-height: 225px">
+                            <img src="{{ asset('bundles/lewmovie/img/no-profile-f.gif') }}">
                         {% else %}
-                            <img src="{{ asset('bundles/lewmovie/img/no-profile-m.gif') }}" style="min-height: 225px; max-height: 225px">
+                            <img src="{{ asset('bundles/lewmovie/img/no-profile-m.gif') }}">
                         {% endif %}
                     {% endif %}
                     </a>
