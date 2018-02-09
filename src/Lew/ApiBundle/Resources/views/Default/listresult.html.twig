@@ -1,0 +1,83 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    {% include 'LewApiBundle:Default:search.html.twig' %}
+    <h2>Liste des films correspondant</h2>
+    <p>Total de films trouvé : {{ results.total_results }}</p>
+    {% if pagination > 1 %}
+        <div class="text-center">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    {% if page > 1 %}
+                        <li>
+                            <a href="{{ path('lew_api_search', {'movie': movie, 'page': page-1}) }}"
+                               aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% for i in 1..pagination %}
+                        <li {% if page == i %}class="active" {% endif %}><a
+                                    href="{{ path('lew_api_search', {'movie': movie, 'page': i}) }}">{{ i }}</a></li>
+                    {% endfor %}
+                    {% if page < pagination %}
+                        <li>
+                            <a href="{{ path('lew_api_search', {'movie': movie, 'page': page+1}) }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    {% endif %}
+
+    <table class="table table-bordered">
+        <tr>
+            <th>id</th>
+            <th>Image</th>
+            <th>Titre</th>
+            <th>Résumé</th>
+            <th>Action</th>
+        </tr>
+        {% for result in results.results %}
+            <tr>
+                <td>{{ result.id }}</td>
+                <td><img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2{{ result.poster_path }}" style="max-height: 150px"></td>
+                <td>{{ result.title }}</td>
+                <td>{{ result.overview }}</td>
+                <td>
+                    <a href="{{ path('lew_api_add_movie', {'id': result.id}) }}" class="btn btn-success">Ajouter</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    {% if pagination > 1 %}
+        <div class="text-center">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    {% if page > 1 %}
+                        <li>
+                            <a href="{{ path('lew_api_search', {'movie': movie, 'page': page-1}) }}"
+                               aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% for i in 1..pagination %}
+                        <li {% if page == i %}class="active" {% endif %}><a
+                                    href="{{ path('lew_api_search', {'movie': movie, 'page': i}) }}">{{ i }}</a></li>
+                    {% endfor %}
+                    {% if page < pagination %}
+                        <li>
+                            <a href="{{ path('lew_api_search', {'movie': movie, 'page': page+1}) }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    {% endif %}
+{% endblock %}
