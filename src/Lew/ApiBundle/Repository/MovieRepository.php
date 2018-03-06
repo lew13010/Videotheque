@@ -150,12 +150,13 @@ class MovieRepository extends \Doctrine\ORM\EntityRepository
     public function getRecentlyMovies()
     {
         $date = new \DateTime();
-        $week = date_sub($date, date_interval_create_from_date_string('1 month'));
+        $week = date_sub($date, date_interval_create_from_date_string('6 month'));
 
         $qb = $this->createQueryBuilder('m');
         $qb
             ->select('m')
             ->where('m.dateAjout > :week')
+            ->andWhere('m.vu = false')
             ->setParameter(':week', $week)
             ->orderBy('m.dateAjout', 'desc')
         ;
