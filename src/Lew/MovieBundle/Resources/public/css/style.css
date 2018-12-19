@@ -1,0 +1,23 @@
+.thumbnail {
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.thumbnail > a {
+    height: 25vh;
+    display: flex;
+}
+
+.thumbnail > a > img{
+    margin: auto;
+    height: 100%;
+}
+
+.caption {
+    height: 6vh;
+}
+
+#casting .caption {
+    height: 10vh;
+}
